@@ -1,7 +1,7 @@
 import requests
 import time
 import asyncio
-import math
+import eel
 
 from helpers import msg_handler as mh
 
@@ -22,17 +22,17 @@ class File_Actions:
                 f.close()
 
 async def Main_RD():
+    print('start')
     global open_price
     global close_price
+    data_kline = {'Open': 0.0, 'Close': 0.0, 'High': 0.0, 'Low': 0.0, 'Color': '', 'Size': 0.0}
 
     file = File_Actions
 
     while True:
         open_price = float(get_price())
-        await asyncio.sleep(5)
+        await asyncio.sleep(1800)
         close_price = float(get_price())
-
-        data_kline = {'Open': 0.0, 'Close': 0.0, 'High': 0.0, 'Low': 0.0, 'Color': '', 'Size': 0.0}
 
         #   Handler for recording data
         data_kline['Open'] = open_price
@@ -46,7 +46,7 @@ async def Main_RD():
             data_kline['Color'] = 'red'
         
         file.write_to_file('klines', str(data_kline) + '\n')
-        print(data_kline)
+        print('Done')
         
 async def Main_High():
     global high_price

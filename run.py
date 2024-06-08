@@ -1,16 +1,13 @@
 import asyncio
-import requests
+
 
 from helpers import msg_handler as mh
 from src.recording_data import Main_RD
 from src.recording_data import Main_High
-
-async def User_requests():
-    while True:
-        await asyncio.sleep(2)
-        print('This is Egor')
+from src.solves import Main_Solves
+from src.bs import Main_Buy_Sell
 
 async def main():
-    await asyncio.gather(User_requests(), Main_RD(), Main_High())
+    await asyncio.gather(Main_RD(), Main_Solves(), Main_High(), Main_Buy_Sell())
 
 asyncio.run(main())
